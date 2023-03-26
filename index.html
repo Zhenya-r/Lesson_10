@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Lesson 10</title>
+</head>
+
+<body>
+   <p> Дано історію цін на цінні папери за деякий період (згенерувати від 1 до 10000) </p>
+   <script>
+      function getRandomNumb(minNumb, maxNumb) {
+         return minNumb + Math.floor(Math.random() * (maxNumb - minNumb + 1))
+      }
+
+      function getArray(arrayLength) {
+         return new Array(arrayLength).fill(0).map(() => getRandomNumb(1, 10000))
+      }
+
+      const arrPrice = getArray(5)
+      document.write(`${arrPrice}`)
+   </script>
+
+   <ol>
+      <li>
+         <a href="tasks/task_1.html">Задача 1</a>
+         <p>Сформувати новий масив, у якому є тільки ті, що більші за 1000 грн.</p>
+         <script>
+            function getArrayMoreThanValue(arr, value) {
+               return arr.filter(e => e > value)
+            }
+            document.write(getArrayMoreThanValue(arrPrice, 1000))
+         </script>
+      </li>
+      <li>
+         <a href="tasks/task_2.html">Задача 2</a>
+         <p>Сформувати новий масив, у якому є номери тільки тих, що більші за 1000 грн.</p>
+         <script>
+            function getIndexArrayMoreThanValue(arr, value) {
+               return arr.map((e, index) => {
+                  if (e > value) return index
+               }).filter(e => e)
+
+               // return arr.reduce((accumulator, element, index) => {
+               //    if (element > value) accumulator.push(index)
+               //    return accumulator
+               // }, [])
+
+
+            }
+            document.write(getIndexArrayMoreThanValue(arrPrice, 1000))
+         </script>
+      </li>
+      <li>
+         <a href="tasks/task_3.html">Задача 3</a>
+         <p>Сформувати список з тих цін, які більші за попереднє значення</p>
+         <script>
+            function getArrayPriceBiggerThanPrev(arrPrice) {
+               const arrayPriceBiggerThanPrev = []
+               for (let i = 1; i < arrPrice.length; i++) {
+                  arrPrice[i] > arrPrice[i - 1] ? arrayPriceBiggerThanPrev.push(arrPrice[i]) : arrayPriceBiggerThanPrev
+               }
+               return arrayPriceBiggerThanPrev
+            }
+            document.write(getArrayPriceBiggerThanPrev(arrPrice))
+         </script>
+      </li>
+      <li>
+         <a href="tasks/task_4.html">Задача 4</a>
+         <p>Сформувати новий масив, що міститиме значення цін у відсотках стосовно максимального</p>
+         <script>
+            function getArrayPricenInPercet(arrPrice) {
+               const maxValue = Math.max(...arrPrice)
+               return arrPrice.map((price) => `${price * 100 / maxValue}%`)
+            }
+
+            document.write(getArrayPricenInPercet(arrPrice))
+         </script>
+      </li>
+      <li>
+         <a href="tasks/task_5.html">Задача 5</a>
+         <p>Підрахувати кількість змін цін</p>
+         <script>
+            function caclAmountChanges(arrPrice) {
+               let counterPriceChanges = 0
+               for (let i = 1; i < arrPrice.length; i++) {
+                  arrPrice[i] === arrPrice[i - 1] ? counterPriceChanges : counterPriceChanges++
+               }
+               return counterPriceChanges
+            }
+            document.write(caclAmountChanges(arrPrice))
+         </script>
+      </li>
+      <li>
+         <a href="tasks/task_6.html">Задача 6</a>
+         <p>Визначити, чи є ціна, що менше 1000</p>
+         <script>
+            function isLessThenValue(array, value) {
+               return array.some(price => price < value)
+            }
+            document.write(isLessThenValue(arrPrice, 1000))
+         </script>
+      </li>
+      <li>
+         <a href="tasks/task_7.html">Задача 7</a>
+         <p>Визначати, чи усі ціни більше за 1000</p>
+         <script>
+            function isAllElementsMoreThanValue(array, value) {
+               return array.every(price => price > value)
+            }
+            document.write(isAllElementsMoreThanValue(arrPrice, 1000))
+         </script>
+      </li>
+      <li>
+         <a href="tasks/task_8.html">Задача 8</a>
+         <p>Підрахувати кількість цін, що більше за 1000</p>
+         <script>
+            function getAmountPriceMoreThanValue(arrPrice, value) {
+               return arrPrice.reduce((counterPrice, price) => {
+                  return price > value ? counterPrice + 1 : counterPrice
+               }, 0)
+            }
+            document.write(getAmountPriceMoreThanValue(arrPrice, 1000))
+         </script>
+      </li>
+      <li>
+         <a href="tasks/task_9.html">Задача 9</a>
+         <p>Підрахувати суму цін, що більше за 1000</p>
+         <script>
+            function getSummPriceMoreThanValue(arrPrice, value) {
+               return arrPrice.reduce((counterPrice, price) => {
+                  return price > value ? counterPrice + price : counterPrice
+               }, 0)
+            }
+            document.write(getSummPriceMoreThanValue(arrPrice, 1000))
+         </script>
+      </li>
+      <li>
+         <a href="tasks/task_10.html">Задача 10</a>
+         <p>Знайти першу ціну, що більше за 1000</p>
+         <script>
+            function findFirstPriceGreatherThanValue(arrPrice, value) {
+               return arrPrice.find(price => price > value)
+            }
+            document.write(findFirstPriceGreatherThanValue(arrPrice, 1000))
+         </script>
+      <li>
+         <a href="tasks/task_9.html">Задача 11</a>
+         <p>Знайти індекс першої ціни, що більше за 1000</p>
+         <script>
+            function findIndexFirstPriceGreatherThanValue(arrPrice, value) {
+               return arrPrice.findIndex(price => price > value)
+            }
+            document.write(findIndexFirstPriceGreatherThanValue(arrPrice, 1000))
+         </script>
+      </li>
+      <li>
+         <a href="tasks/task_10.html">Задача 12</a>
+         <p>Знайти останню ціну, що більше за 1000</p>
+         <script>
+            function findLastPriceGreatherThanValue(arrPrice, value) {
+               return arrPrice.findLast(price => price > value)
+            }
+            document.write(findLastPriceGreatherThanValue(arrPrice, 1000))
+         </script>
+      </li>
+      <li>
+         <a href="tasks/task_10.html">Задача 13</a>
+         <p>Знайти індекс останньої ціни, що більше за 1000</p>
+         <script>
+            function findIndexLastPriceGreatherThanValue(arrPrice, value) {
+               return arrPrice.findLastIndex(price => price > value)
+            }
+            document.write(findIndexLastPriceGreatherThanValue(arrPrice, 1000))
+         </script>
+      </li>
+   </ol>
+</body>
+
+</html>
